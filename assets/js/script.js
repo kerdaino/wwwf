@@ -14,12 +14,38 @@ navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' }
 document.getElementById('year').textContent = new Date().getFullYear();
 
 
-// Simple mobile nav toggle
+// --- Mobile nav toggle with auto-hide and icon reset ---
 const navToggle = document.getElementById('nav-toggle');
 const mainNav = document.querySelector('.main-nav');
-navToggle && navToggle.addEventListener('click', ()=>{
-mainNav.style.display = mainNav.style.display === 'flex' ? 'none' : 'flex';
+let navTimeout;
+
+// Toggle menu visibility
+navToggle?.addEventListener('click', () => {
+  const isActive = mainNav.classList.toggle('active');
+  navToggle.textContent = isActive ? '×' : '☰';
+  resetNavAutoHide();
 });
+
+// Hide nav on scroll
+window.addEventListener('scroll', () => {
+  if (mainNav.classList.contains('active')) {
+    mainNav.classList.remove('active');
+    navToggle.textContent = '☰'; // reset icon
+  }
+});
+
+// Auto-hide after inactivity (10 seconds)
+function resetNavAutoHide() {
+  clearTimeout(navTimeout);
+  navTimeout = setTimeout(() => {
+    if (mainNav.classList.contains('active')) {
+      mainNav.classList.remove('active');
+      navToggle.textContent = '☰'; // reset icon
+    }
+  }, 10000);
+}
+
+
 
 
 // Contact form handler (no backend) — simple client-side confirmation and clearing

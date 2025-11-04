@@ -32,14 +32,16 @@ body {
     padding: 1rem;
 }
 
-a{
+a {
     text-decoration: none;
 }
 
 /* Header */
 .site-header {
     background: var(--white);
-    position: sticky;
+    position: fixed;
+    width: 100%;
+    padding: 5px;
     top: 0;
     z-index: 60;
     border-bottom: 2px solid rgba(0, 0, 0, 0.05);
@@ -62,14 +64,18 @@ a{
 }
 
 .logo-mark {
-    font-size: 28px;
-    background: var(--royal-blue);
+    font-size: 30px;
+    /* background: var(--royal-blue); */
     color: var(--white);
     width: 48px;
     height: 48px;
     display: grid;
     place-items: center;
     border-radius: 10px;
+}
+
+.logo-mark img {
+    width: 100%;
 }
 
 .logo-text h1 {
@@ -95,7 +101,7 @@ a{
     font-weight: 600;
 }
 
-.main-nav .btn-primary{
+.main-nav .btn-primary {
     color: var(--white);
 }
 
@@ -109,7 +115,7 @@ a{
     padding: 2rem 0;
     background: linear-gradient(180deg, rgba(30, 58, 138, 0.06), rgba(0, 0, 0, 0.02));
     overflow: hidden;
-    margin: auto 10px;
+    margin: 25px 10px;
 }
 
 .hero .overlay {
@@ -317,6 +323,12 @@ a{
 
 .logo-small {
     font-size: 22px;
+    width: 60px;
+    height: 60px;
+}
+
+.logo-small img {
+    width: 100%;
 }
 
 
@@ -360,8 +372,43 @@ a{
         border: 0;
         font-size: 22px;
     }
-}
 
+    .main-nav.active {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: var(--white);
+        width: 200px;
+        padding: 1rem;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        border-radius: 0 0 10px 10px;
+        z-index: 99;
+        animation: fadeIn 0.3s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .main-nav.active a {
+        padding: 10px 5px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .main-nav.active a:last-child {
+        border-bottom: none;
+    }
+}
 
 /* Small screens tweaks */
 @media(max-width:480px) {
@@ -371,6 +418,10 @@ a{
 
     .gallery .swiper {
         height: 240px;
+    }
+
+    .donation-grid {
+        grid-template-columns: 1fr;
     }
 }
 
@@ -382,4 +433,9 @@ input:focus,
 textarea:focus {
     outline: 3px solid rgba(30, 58, 138, 0.15);
     outline-offset: 2px;
+}
+
+/* Show mobile menu when active */
+@media (max-width: 900px) {
+    
 }
